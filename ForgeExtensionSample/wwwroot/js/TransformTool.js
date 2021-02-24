@@ -1,11 +1,12 @@
-﻿///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 // Transform Tool viewer extension
 // by Philippe Leefsma, August 2015
 //
 ///////////////////////////////////////////////////////////////////
 AutodeskNamespace("Autodesk.ADN.Viewing.Extension");
 
-Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
+Autodesk.ADN.Viewing.Extension.TransformTool =  function (viewer, options) {
 
     ///////////////////////////////////////////////////////////////////////////
     //
@@ -54,7 +55,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         ///////////////////////////////////////////////////////////////////////////
         function onTxChange() {
 
-            for (var fragId in _selectedFragProxyMap) {
+            for(var fragId in _selectedFragProxyMap) {
 
                 var fragProxy = _selectedFragProxyMap[fragId];
 
@@ -90,7 +91,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
 
             //component unselected
 
-            if (!event.fragIdsArray.length) {
+            if(!event.fragIdsArray.length) {
 
                 _hitPoint = null;
 
@@ -107,7 +108,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
             }
 
 
-            if (_hitPoint) {
+            if(_hitPoint) {
 
                 _transformControlTx.visible = true;
 
@@ -188,11 +189,11 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         // returns all transformed meshes
         //
         ///////////////////////////////////////////////////////////////////////////
-        this.getTransformMap = function () {
+        this.getTransformMap = function() {
 
             var transformMap = {};
 
-            for (var fragId in _modifiedFragIdMap) {
+            for(var fragId in _modifiedFragIdMap){
 
                 var fragProxy = viewer.impl.getFragmentProxy(
                     viewer.model,
@@ -214,12 +215,12 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         //
         //
         ///////////////////////////////////////////////////////////////////////////
-        this.getNames = function () {
+        this.getNames = function() {
 
             return ['Dotty.Viewing.Tool.TransformTool'];
         };
 
-        this.getName = function () {
+        this.getName = function() {
 
             return 'Dotty.Viewing.Tool.TransformTool';
         };
@@ -228,7 +229,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         // activates tool
         //
         ///////////////////////////////////////////////////////////////////////////
-        this.activate = function () {
+        this.activate = function() {
 
             viewer.select([]);
 
@@ -264,7 +265,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         // deactivate tool
         //
         ///////////////////////////////////////////////////////////////////////////
-        this.deactivate = function () {
+        this.deactivate = function() {
 
             viewer.impl.removeOverlay(
                 'Dotty.Viewing.Tool.TransformTool',
@@ -292,45 +293,45 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         //
         //
         ///////////////////////////////////////////////////////////////////////////
-        this.update = function (t) {
+        this.update = function(t) {
 
             return false;
         };
 
-        this.handleSingleClick = function (event, button) {
+        this.handleSingleClick = function(event, button) {
 
 
             return false;
         };
 
-        this.handleDoubleClick = function (event, button) {
-
-            return false;
-        };
-
-
-        this.handleSingleTap = function (event) {
+        this.handleDoubleClick = function(event, button) {
 
             return false;
         };
 
 
-        this.handleDoubleTap = function (event) {
+        this.handleSingleTap = function(event) {
 
             return false;
         };
 
-        this.handleKeyDown = function (event, keyCode) {
+
+        this.handleDoubleTap = function(event) {
 
             return false;
         };
 
-        this.handleKeyUp = function (event, keyCode) {
+        this.handleKeyDown = function(event, keyCode) {
 
             return false;
         };
 
-        this.handleWheelInput = function (delta) {
+        this.handleKeyUp = function(event, keyCode) {
+
+            return false;
+        };
+
+        this.handleWheelInput = function(delta) {
 
             return false;
         };
@@ -339,7 +340,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         //
         //
         ///////////////////////////////////////////////////////////////////////////
-        this.handleButtonDown = function (event, button) {
+        this.handleButtonDown = function(event, button) {
 
             _hitPoint = getHitPoint(event);
 
@@ -356,7 +357,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         //
         //
         ///////////////////////////////////////////////////////////////////////////
-        this.handleButtonUp = function (event, button) {
+        this.handleButtonUp = function(event, button) {
 
             _isDragging = false;
 
@@ -371,11 +372,11 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         //
         //
         ///////////////////////////////////////////////////////////////////////////
-        this.handleMouseMove = function (event) {
+        this.handleMouseMove = function(event) {
 
             if (_isDragging) {
 
-                if (_transformControlTx.onPointerMove(event)) {
+                if (_transformControlTx.onPointerMove(event) ) {
 
                     return true;
                 }
@@ -394,17 +395,17 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         //
         //
         ///////////////////////////////////////////////////////////////////////////
-        this.handleGesture = function (event) {
+        this.handleGesture = function(event) {
 
             return false;
         };
 
-        this.handleBlur = function (event) {
+        this.handleBlur = function(event) {
 
             return false;
         };
 
-        this.handleResize = function () {
+        this.handleResize = function() {
 
         };
     }
@@ -435,7 +436,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
     };
 
 
-    _self.getObjectTree = function () {
+    _self.getObjectTree = function() {
         viewer.removeEventListener(Autodesk.Viewing.OBJECT_TREE_CREATED_EVENT,
             this.getObjectTree);
         viewer.toolController.activateTool(_self.tool.getName());
@@ -483,3 +484,4 @@ Autodesk.ADN.Viewing.Extension.TransformTool.prototype.constructor =
 Autodesk.Viewing.theExtensionManager.registerExtension(
     'Autodesk.ADN.Viewing.Extension.TransformTool',
     Autodesk.ADN.Viewing.Extension.TransformTool);
+

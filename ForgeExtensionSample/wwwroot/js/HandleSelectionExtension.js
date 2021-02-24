@@ -22,6 +22,7 @@
         return true;
     }
 
+
     onToolbarCreated() {
         // Create a new toolbar group if it doesn't exist
         this._group = this.viewer.toolbar.getControl('allMyAwesomeExtensionsToolbar');
