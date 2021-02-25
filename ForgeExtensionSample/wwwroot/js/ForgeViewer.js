@@ -7,7 +7,7 @@ function launchViewer(urn) {
     };
 
     Autodesk.Viewing.Initializer(options, () => {
-        viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), { extensions: ['HandleSelectionExtension', 'ModelSummaryExtension', 'Autodesk.ADN.Viewing.Extension.TransformTool', 'GridExtension','TransformationExtension']] });
+        viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), { extensions: ['HandleSelectionExtension', 'TransformationExtension'] });
 
         viewer.start();
         var documentId = 'urn:' + urn;
