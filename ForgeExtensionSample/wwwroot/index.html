@@ -18,9 +18,6 @@
     <script src="js/ForgeTree.js"></script>
     <script src="js/ForgeViewer.js"></script>
 
-    <!--<script src="js/transformextension.js"></script>-->
-    <script src="js/handleselectionextension.js"></script>
-    <script src="js/dat.gui.js"></script>
 
     <script src="js/InputTransform.js"></script>
 
@@ -100,72 +97,4 @@
 
 </body>
 
-
-
-<!--<script>
-
-    tree = viewer.model.getData().instanceTree;
-
-    let nodeList = Object.values(tree.nodeAccess.dbIdToIndex);
-
-    let baseId = findNodeIdbyName('Base');
-    let doorId = findNodeIdbyName('HourArm');
-
-    let pvtBase = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
-    let positionBase = getFragmentWorldMatrixByNodeId(baseId).matrix[0].getPosition().clone();
-    pvtBase.position.x = positionBase.x;
-    pvtBase.position.y = positionBase.y;
-    pvtBase.position.z = positionBase.z;
-    viewer.impl.scene.add(pvtBase);
-
-    let pvtDoor = new THREE.Mesh();
-    let positionDoor = getFragmentWorldMatrixByNodeId(doorId).matrix[0].getPosition().clone();
-    pvtDoor.position.x = - positionDoor.x + Math.abs(positionDoor.x - pvtBase.position.x);
-    pvtDoor.position.y = - positionDoor.y + Math.abs(positionDoor.y - pvtBase.position.y);
-    pvtDoor.position.z = - positionDoor.z + Math.abs(positionDoor.z - pvtBase.position.z);
-    Pivot_BaseRod.add(pvtDoor);
-
-    assignTransformations(pvtDoor, doorId);
-
-
-
-    let gui = new dat.GUI({ autoPlace: false });
-    document.getElementById("MyControls").append(gui.domElement);
-
-    let box_control = null;
-
-    let MainAxis = null;
-
-    let GiroController = function () {
-        this.MainAxis = 0;
-    }
-
-    box_control = new GiroController();
-    MainAxis = gui.add(box_control, 'MainAxis', -180, 180);
-
-
-    MainAxis.onChange(function (value) {
-        pvtBase.rotation.y = value * Math.PI / 180;
-        assignTransformations(pvtDoor, doorId);
-
-        viewer.impl.sceneUpdated(true);
-    });
-
-</script>-->
 </html>
-
-
-<!--<script>
-    //X
-    document.getElementById("XAxis").addEventListener("change", function () {
-        
-    });
-    //Y
-    document.getElementById("XAxis").addEventListener("change", function () {
-        document.getElementById("demo").innerHTML = "Hello World";
-    });
-    //Z
-    document.getElementById("XAxis").addEventListener("change", function () {
-        document.getElementById("demo").innerHTML = "Hello World";
-    });
-</script>-->

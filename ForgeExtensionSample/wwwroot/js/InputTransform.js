@@ -508,7 +508,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
             }
         };
         this._button.setToolTip('Transform Extension');
-        this._button.addClass('transformextensionicon');
+        this._button.addClass('inputtransformextensionicon');
         this._group.addControl(this._button);
     };
 
