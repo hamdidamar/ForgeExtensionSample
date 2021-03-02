@@ -43,9 +43,11 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
 
         var _transformControlTx = null;
 
+        document.getElementById("XAxis").addEventListener("change", function () {
+            positionChangeInputs();
+        });
 
-
-        let gui = new dat.GUI({ autoPlace: false });
+        /*let gui = new dat.GUI({ autoPlace: false });
         document.getElementById("MyControls").append(gui.domElement);
 
         let box_control = null;
@@ -63,13 +65,30 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         box_control = new GuiController();
         XAxis = gui.add(box_control, 'XAxis');
         YAxis = gui.add(box_control, 'YAxis');
-        ZAxis = gui.add(box_control, 'ZAxis');
+        ZAxis = gui.add(box_control, 'ZAxis');*/
 
-        XAxis.onChange(function (value) {
-            console.warn("X Changed:" + value);
-            viewer.impl.sceneUpdated(true);
-        });
+        //document.getElementById("XAxis").addEventListener("onChange", function () {
+        //    console.log("test");
+        //});
 
+        //XAxis.onChange(function (value) {
+        //    console.warn("X Changed:" + value);
+        //    viewer.impl.sceneUpdated(true);
+        //});
+
+        //XAxis.addEventListener(XAxis.onChange,positionChangeInputs);
+
+        function positionChangeInputs() {
+
+            var fragProxy = viewer.impl.getFragmentProxy(
+                viewer.model,
+                fragId);
+
+            fragProxy.getAnimTransform();
+
+            fragProxy.position.x = document.getElementById("XAxis").value;
+            
+        }
 
         ///////////////////////////////////////////////////////////////////////////
         // Creates a dummy mesh to attach control to
@@ -177,9 +196,12 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
 
                     //XAxis.value = fragProxy.position.x;
                     console.log(fragProxy.position.x);
-                    XAxis.setValue(fragProxy.position.x);
-                    YAxis.setValue(fragProxy.position.y);
-                    ZAxis.setValue(fragProxy.position.z);
+                    //XAxis.setValue(fragProxy.position.x);
+                    document.getElementById("XAxis").value = fragProxy.position.x;
+                    document.getElementById("YAxis").value = fragProxy.position.y;
+                    document.getElementById("ZAxis").value = fragProxy.position.z;
+                    //YAxis.setValue(fragProxy.position.y);
+                    //ZAxis.setValue(fragProxy.position.z);
                     console.log(fragProxy.position.y);
                     console.log(fragProxy.position.z);
 

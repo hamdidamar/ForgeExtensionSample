@@ -90,10 +90,18 @@
         </div>
     </div>
     <div id="MyControls" class="adsk control">
-        <p style="text-align: center;">Robo Controls</p>
-        <!-- <input type="range">Main Axis</input> -->
+        <label>X</label>
+        <input id="XAxis" type="text" />
+        <label>Y</label>
+        <input id="YAxis" type="text" />
+        <label>Z</label>
+        <input id="ZAxis" type="text" />
     </div>
+
 </body>
+
+
+
 <!--<script>
 
     tree = viewer.model.getData().instanceTree;
@@ -145,3 +153,19 @@
 
 </script>-->
 </html>
+
+
+<!--<script>
+    //X
+    document.getElementById("XAxis").addEventListener("change", function () {
+        
+    });
+    //Y
+    document.getElementById("XAxis").addEventListener("change", function () {
+        document.getElementById("demo").innerHTML = "Hello World";
+    });
+    //Z
+    document.getElementById("XAxis").addEventListener("change", function () {
+        document.getElementById("demo").innerHTML = "Hello World";
+    });
+</script>-->
