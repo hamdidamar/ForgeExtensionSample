@@ -43,9 +43,15 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
 
         var _transformControlTx = null;
 
-        document.getElementById("XAxis").addEventListener("change", function () {
-            positionChangeInputs();
+        var AxisArray = ["XAxis", "YAxis", "ZAxis"];
+
+        AxisArray.forEach(function (axis) {
+            document.getElementById(axis).addEventListener("change", function () {
+                positionChangeInputs();
+            });
         });
+
+
 
         /*let gui = new dat.GUI({ autoPlace: false });
         document.getElementById("MyControls").append(gui.domElement);
@@ -79,38 +85,45 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         //XAxis.addEventListener(XAxis.onChange,positionChangeInputs);
 
         function positionChangeInputs() {
-            const selSet = viewer.getSelection();
-            const targetElem = selSet[0];
+            //
+            for (var fragId in _selectedFragProxyMap) {
 
-            const model = viewer.model;
-            const instanceTree = model.getData().instanceTree;
-            const fragList = model.getFragmentList();
-
-            let bounds = new THREE.Box3();
-
-            instanceTree.enumNodeFragments(instanceTree.nodeAccess.dbIdToIndex, (fragId) => {
-                let box = new THREE.Box3();
-                fragList.getWorldBounds(fragId, box);
-
-                bounds.union(box);
-
-                var fragProxy = viewer.impl.getFragmentProxy(
-                    viewer.model,
-                    fragId);
+                var fragProxy = _selectedFragProxyMap[fragId];
 
                 var position = new THREE.Vector3(
-                    fragProxy.position.x = document.getElementById("XAxis").value);
+                    fragProxy.position.x = document.getElementById("XAxis").value,
+                    fragProxy.position.y = document.getElementById("YAxis").value,
+                    fragProxy.position.z = document.getElementById("ZAxis").value);
 
                 fragProxy.position = position;
-                //fragProxy.position.x = document.getElementById("XAxis").value;
+
                 fragProxy.updateAnimTransform();
+            }
 
-            }, true);
-
-            const position1 = bounds.center();
-            console.log("test");
-            console.log(position1);
             viewer.impl.sceneUpdated(true);
+            //const model = viewer.model;
+            //const instanceTree = model.getData().instanceTree;
+
+
+            //instanceTree.enumNodeFragments(instanceTree.nodeAccess.dbIdToIndex, (fragId) => {
+
+            //    fragProxy = fragId;
+            //    fragProxy.position.x = document.getElementById("XAxis").value;
+
+
+            //    fragProxy.updateAnimTransform();
+
+
+            //    //fragProxy.position.x = document.getElementById("XAxis").value;
+            //    fragProxy.updateAnimTransform();
+            //    console.log("test"+fragProxy.position);
+
+            //}, true);
+
+            
+            console.log("test");
+            
+            //viewer.impl.sceneUpdated(true);
             
         }
 
