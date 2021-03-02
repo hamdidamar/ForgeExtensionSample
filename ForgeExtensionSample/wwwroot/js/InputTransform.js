@@ -52,40 +52,8 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         });
 
 
-
-        /*let gui = new dat.GUI({ autoPlace: false });
-        document.getElementById("MyControls").append(gui.domElement);
-
-        let box_control = null;
-
-        let XAxis = null;
-        let YAxis = null;
-        let ZAxis = null;
-
-        let GuiController = function () {
-            this.XAxis = 0;
-            this.YAxis = 0;
-            this.ZAxis = 0;
-        }
-
-        box_control = new GuiController();
-        XAxis = gui.add(box_control, 'XAxis');
-        YAxis = gui.add(box_control, 'YAxis');
-        ZAxis = gui.add(box_control, 'ZAxis');*/
-
-        //document.getElementById("XAxis").addEventListener("onChange", function () {
-        //    console.log("test");
-        //});
-
-        //XAxis.onChange(function (value) {
-        //    console.warn("X Changed:" + value);
-        //    viewer.impl.sceneUpdated(true);
-        //});
-
-        //XAxis.addEventListener(XAxis.onChange,positionChangeInputs);
-
         function positionChangeInputs() {
-            //
+            
             for (var fragId in _selectedFragProxyMap) {
 
                 var fragProxy = _selectedFragProxyMap[fragId];
@@ -101,30 +69,14 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
             }
 
             viewer.impl.sceneUpdated(true);
-            //const model = viewer.model;
-            //const instanceTree = model.getData().instanceTree;
-
-
-            //instanceTree.enumNodeFragments(instanceTree.nodeAccess.dbIdToIndex, (fragId) => {
-
-            //    fragProxy = fragId;
-            //    fragProxy.position.x = document.getElementById("XAxis").value;
-
-
-            //    fragProxy.updateAnimTransform();
-
-
-            //    //fragProxy.position.x = document.getElementById("XAxis").value;
-            //    fragProxy.updateAnimTransform();
-            //    console.log("test"+fragProxy.position);
-
-            //}, true);
-
+           
             
-            console.log("test");
-            
-            //viewer.impl.sceneUpdated(true);
-            
+        }
+
+        function setInputsValues(fragProxy) {
+            document.getElementById("XAxis").value = fragProxy.position.x;
+            document.getElementById("YAxis").value = fragProxy.position.y;
+            document.getElementById("ZAxis").value = fragProxy.position.z;
         }
 
         ///////////////////////////////////////////////////////////////////////////
@@ -166,7 +118,8 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
                     _transformMesh.position.z - fragProxy.offset.z);
 
                 fragProxy.position = position;
-
+                //setInputs
+                setInputsValues(fragProxy);
                 fragProxy.updateAnimTransform();
             }
 
@@ -231,16 +184,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
 
                     fragProxy.getAnimTransform();
 
-                    //XAxis.value = fragProxy.position.x;
-                    console.log(fragProxy.position.x);
-                    //XAxis.setValue(fragProxy.position.x);
-                    document.getElementById("XAxis").value = fragProxy.position.x;
-                    document.getElementById("YAxis").value = fragProxy.position.y;
-                    document.getElementById("ZAxis").value = fragProxy.position.z;
-                    //YAxis.setValue(fragProxy.position.y);
-                    //ZAxis.setValue(fragProxy.position.z);
-                    console.log(fragProxy.position.y);
-                    console.log(fragProxy.position.z);
+                    setInputsValues(fragProxy);
 
                     var offset = {
 
@@ -314,6 +258,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
 
                 fragProxy.getAnimTransform();
 
+                setInputsValues(fragProxy);
                 transformMap[fragId] = {
                     position: fragProxy.position
                 };
