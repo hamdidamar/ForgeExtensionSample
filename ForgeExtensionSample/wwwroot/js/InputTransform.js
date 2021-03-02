@@ -79,14 +79,38 @@ Autodesk.ADN.Viewing.Extension.TransformTool = function (viewer, options) {
         //XAxis.addEventListener(XAxis.onChange,positionChangeInputs);
 
         function positionChangeInputs() {
+            const selSet = viewer.getSelection();
+            const targetElem = selSet[0];
 
-            var fragProxy = viewer.impl.getFragmentProxy(
-                viewer.model,
-                fragId);
+            const model = viewer.model;
+            const instanceTree = model.getData().instanceTree;
+            const fragList = model.getFragmentList();
 
-            fragProxy.getAnimTransform();
+            let bounds = new THREE.Box3();
 
-            fragProxy.position.x = document.getElementById("XAxis").value;
+            instanceTree.enumNodeFragments(instanceTree.nodeAccess.dbIdToIndex, (fragId) => {
+                let box = new THREE.Box3();
+                fragList.getWorldBounds(fragId, box);
+
+                bounds.union(box);
+
+                var fragProxy = viewer.impl.getFragmentProxy(
+                    viewer.model,
+                    fragId);
+
+                var position = new THREE.Vector3(
+                    fragProxy.position.x = document.getElementById("XAxis").value);
+
+                fragProxy.position = position;
+                //fragProxy.position.x = document.getElementById("XAxis").value;
+                fragProxy.updateAnimTransform();
+
+            }, true);
+
+            const position1 = bounds.center();
+            console.log("test");
+            console.log(position1);
+            viewer.impl.sceneUpdated(true);
             
         }
 
